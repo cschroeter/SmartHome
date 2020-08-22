@@ -1,7 +1,28 @@
 {
   "name": "root",
   "private": true,
+  "dependencies": {},
   "devDependencies": {
-    "lerna": "3.20.2"
+    "@commitlint/cli": "9.1.2",
+    "@commitlint/config-conventional": "9.1.2",
+    "husky": "4.2.5",
+    "lerna": "3.22.1",
+    "prettier": "2.0.5",
+    "pretty-quick": "3.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "volta": {
+    "node": "12.18.3",
+    "yarn": "1.22.4"
   }
 }
