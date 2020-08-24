@@ -1,6 +1,9 @@
 {
   "name": "root",
   "private": true,
+  "workspaces": [
+    "packages/**"
+  ],
   "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "9.1.2",
