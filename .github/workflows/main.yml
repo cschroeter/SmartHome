@@ -1,0 +1,22 @@
+name: CI
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.2
+      - uses: volta-cli/action@v1.4.3
+   
+      - name: Install
+        run: yarn install --frozen-lockfile
+        
+      - name: Build
+        run: yarn build --since
+        
+      - name: Test
+        run: yarn test
+
