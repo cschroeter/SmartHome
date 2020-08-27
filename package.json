@@ -4,6 +4,10 @@
   "workspaces": [
     "packages/**"
   ],
+  "scripts": {
+    "build": "lerna run build",
+    "test": "lerna run test"
+  },
   "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "9.1.2",
