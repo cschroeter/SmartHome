@@ -2925,6 +2925,14 @@
     is-module "^1.0.0"
     resolve "^1.17.0"
 
+"@rollup/plugin-replace@^2.3.3":
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-replace/-/plugin-replace-2.3.3.tgz#cd6bae39444de119f5d905322b91ebd4078562e7"
+  integrity sha512-XPmVXZ7IlaoWaJLkSCDaa0Y6uVo5XQYHhiMFzOd5qSv5rE+t/UJToPIOE56flKIxBFQI27ONsxb7dqHnwSsjKQ==
+  dependencies:
+    "@rollup/pluginutils" "^3.0.8"
+    magic-string "^0.25.5"
+
 "@rollup/pluginutils@^3.0.4", "@rollup/pluginutils@^3.0.8", "@rollup/pluginutils@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-3.1.0.tgz#706b4524ee6dc8b103b3c995533e5ad680c02b9b"
@@ -2961,10 +2969,10 @@
     "@babel/core" "^7.10.5"
     workerpool "^6.0.0"
 
-"@snowpack/plugin-build-script@^2.0.6":
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/@snowpack/plugin-build-script/-/plugin-build-script-2.0.6.tgz#95c85cc6c4c53763a91a2d170633918ecd0d3cc8"
-  integrity sha512-qtvXQq54MaBYJrCTa+DaK/KzUXYBkRukaGzIdhpqW/xzOknCjpufiQIy0VUzxwRQk0OlLC6/h3sV1hSMsoTVJw==
+"@snowpack/plugin-build-script@^2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@snowpack/plugin-build-script/-/plugin-build-script-2.0.7.tgz#1d133030ceac51efce471b66622d1b7320d5ab9f"
+  integrity sha512-f1fZN0Blsfk25oMBf62wvhHm6v7DUG0W85+JFKzYI6SHOIHrYL37o9xaJX7RJpn2kEKCRymWsQo4PclQdnL77w==
   dependencies:
     execa "^4.0.3"
     npm-run-path "^4.0.1"
@@ -2976,10 +2984,10 @@
   dependencies:
     react-refresh "^0.8.3"
 
-"@snowpack/plugin-run-script@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@snowpack/plugin-run-script/-/plugin-run-script-2.1.1.tgz#f0f71cab5e0a482dfceb3306ae3e7d9cab859746"
-  integrity sha512-ZLOcu6n+eLDNxTxKlKK/+smn9PWr/epUKGPw8tBHr3qdKQ64WNpCVr0jnafanzWpzQWD8k92J8POfskKMuEI5Q==
+"@snowpack/plugin-run-script@^2.1.3":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@snowpack/plugin-run-script/-/plugin-run-script-2.1.3.tgz#fb689b76955c63c16934b4eb52af9f478416313a"
+  integrity sha512-DhV7KBHnUULtP7eQGHTAGdYsjI1q+vMuX07X8h/v2JnFVaZqowOBjnjQDfbY9oGtw/PZqiY4KEegAh3qxFqODQ==
   dependencies:
     execa "^4.0.3"
     npm-run-path "^4.0.1"
@@ -4458,6 +4466,17 @@ cosmiconfig@^6.0.0:
     path-type "^4.0.0"
     yaml "^1.7.2"
 
+cosmiconfig@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-7.0.0.tgz#ef9b44d773959cae63ddecd122de23853b60f8d3"
+  integrity sha512-pondGvTuVYDk++upghXJabWzL6Kxu6f26ljFw64Swq9v6sQPUL3EUlVDV56diOjpCayKihL6hVe8exIACU4XcA==
+  dependencies:
+    "@types/parse-json" "^4.0.0"
+    import-fresh "^3.2.1"
+    parse-json "^5.0.0"
+    path-type "^4.0.0"
+    yaml "^1.10.0"
+
 cross-spawn@^6.0.0:
   version "6.0.5"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-6.0.5.tgz#4a5ec7c64dfae22c3a14124dbacdee846d80cbc4"
@@ -4915,10 +4934,10 @@ es-abstract@^1.17.0-next.1, es-abstract@^1.17.5:
     string.prototype.trimend "^1.0.1"
     string.prototype.trimstart "^1.0.1"
 
-es-module-lexer@^0.3.17:
-  version "0.3.24"
-  resolved "https://registry.yarnpkg.com/es-module-lexer/-/es-module-lexer-0.3.24.tgz#e6b2900758e9e210d23aec2092efc13ca235adea"
-  integrity sha512-jm/i7KdJtaMDle921xIsA/MQQOGuZ6goYxhlV+k+gQNI7FtP4N6jknrmJvj++3ODpiyFGwQ4PIstJfHJQJNc+g==
+es-module-lexer@^0.3.24:
+  version "0.3.25"
+  resolved "https://registry.yarnpkg.com/es-module-lexer/-/es-module-lexer-0.3.25.tgz#24a1abcb9c5dc96923a8e42be033b801f788de06"
+  integrity sha512-H9VoFD5H9zEfiOX2LeTWDwMvAbLqcAyA2PIb40TOAvGpScOjit02oTGWgIh+M0rx2eJOKyJVM9wtpKFVgnyC3A==
 
 es-to-primitive@^1.2.1:
   version "1.2.1"
@@ -4941,10 +4960,10 @@ es6-promisify@^5.0.0:
   dependencies:
     es6-promise "^4.0.3"
 
-esbuild@^0.6.11:
-  version "0.6.27"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.6.27.tgz#e8f4d6b3bb3b4156a5e5679b5b582561b075828d"
-  integrity sha512-oonxxg/ExZt9tYMPnEUDYAN7YefEPsC21pXez5rwKcCPAF6gzMuxLvAdbU4dCT8Tp0I2avODz61vrGyu5wR/uA==
+esbuild@^0.6.28:
+  version "0.6.34"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.6.34.tgz#76565a60e006f45d5f273b6e59e61ed0816551f5"
+  integrity sha512-InRdL/Q96pUucPqovJzvuLhquZr6jOn81FDVwFjCKz1rYKIm9OdOC+7Fs4vr6x48vKBl5LzKgtjU39BUpO636A==
 
 escalade@^3.0.2:
   version "3.0.2"
@@ -4972,6 +4991,26 @@ escodegen@^1.14.1:
     optionator "^0.8.1"
   optionalDependencies:
     source-map "~0.6.1"
+
+esinstall@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/esinstall/-/esinstall-0.2.0.tgz#8f4f2f20cb93f5d74aa3d6b2164786dc514765a2"
+  integrity sha512-jLmMiMlKNpZr4Yr0T+3eNvYP2F2FpkfwPKVBmEFzlvKXoWhpvARUTuqv4TRkG3ZbgrhoPcwD0V2sh92ii8T0AA==
+  dependencies:
+    "@rollup/plugin-alias" "^3.0.1"
+    "@rollup/plugin-commonjs" "^15.0.0"
+    "@rollup/plugin-inject" "^4.0.2"
+    "@rollup/plugin-json" "^4.0.0"
+    "@rollup/plugin-node-resolve" "^9.0.0"
+    "@rollup/plugin-replace" "^2.3.3"
+    es-module-lexer "^0.3.24"
+    is-builtin-module "^3.0.0"
+    kleur "^4.1.1"
+    mkdirp "^1.0.3"
+    rimraf "^3.0.0"
+    rollup "^2.23.0"
+    rollup-plugin-node-polyfills "^0.2.1"
+    validate-npm-package-name "^3.0.0"
 
 esprima@^4.0.0, esprima@^4.0.1:
   version "4.0.1"
@@ -5835,7 +5874,7 @@ import-fresh@^2.0.0:
     caller-path "^2.0.0"
     resolve-from "^3.0.0"
 
-import-fresh@^3.0.0, import-fresh@^3.1.0:
+import-fresh@^3.0.0, import-fresh@^3.1.0, import-fresh@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-3.2.1.tgz#633ff618506e793af5ac91bf48b72677e15cbe66"
   integrity sha512-6e1q1cnWP2RXD9/keSkxHScg508CdXqXWgWBaETNhyuBFz+kUZlKboh+ISK+bU++DmbHimVBrOz/zzPe0sZ3sQ==
@@ -6229,6 +6268,11 @@ isarray@1.0.0, isarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
   integrity sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=
+
+isbinaryfile@^4.0.6:
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/isbinaryfile/-/isbinaryfile-4.0.6.tgz#edcb62b224e2b4710830b67498c8e4e5a4d2610b"
+  integrity sha512-ORrEy+SNVqUhrCaal4hA4fBzhggQQ+BaLntyPOdoEiwlKZW9BZiJXjg3RMiruE4tPEI3pyVPpySHQF/dKWperg==
 
 isexe@^2.0.0:
   version "2.0.0"
@@ -6838,10 +6882,10 @@ kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-kleur@^4.1.0:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/kleur/-/kleur-4.1.1.tgz#80b49dd7d1afeba41b8dcdf4ecfff9252205fc52"
-  integrity sha512-BsNhM6T/yTWFG580CRnYhT3LfUuPK7Hwrm+W2H0G8lK/nogalP5Nsrh/cHjxVVkzl0sFm7z8b8rNcZCfKxeoxA==
+kleur@^4.1.1:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/kleur/-/kleur-4.1.2.tgz#aa58ce5e76b84fbd571307f1d1b77f74db8593f3"
+  integrity sha512-GDy+aV+1kr510OLi3Rkb81+t3orUyX5iHjNFEmHw6WJg6PB71HPhCLHOh2pWNMKLd7L7ywI9rzpSR664E20TQQ==
 
 lerna@3.22.1:
   version "3.22.1"
@@ -7885,7 +7929,7 @@ p-queue@^4.0.0:
   dependencies:
     eventemitter3 "^3.1.0"
 
-p-queue@^6.2.1:
+p-queue@^6.6.1:
   version "6.6.1"
   resolved "https://registry.yarnpkg.com/p-queue/-/p-queue-6.6.1.tgz#578891ada028a61371ec2692b26614d1b7d2b10a"
   integrity sha512-miQiSxLYPYBxGkrldecZC18OTLjdUqnlRebGzPRiVxB8mco7usCmm7hFuxiTvp93K18JnLtE4KMMycjAu/cQQg==
@@ -9061,29 +9105,25 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-snowpack@2.9.3:
-  version "2.9.3"
-  resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-2.9.3.tgz#7272b713ceba202202dae9659b40fa1ce02a3047"
-  integrity sha512-ji32okEKYKr7aKmnwie8gCqQUcRxEdipu4/VfoXtKnXKL8qeYxJYvgBJsYeIE7//Hg0/6qurckeO7/lzZ9P9nQ==
+snowpack@2.12.1:
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-2.12.1.tgz#fd065896473ff0bda6d46fde3bab5e39fa917919"
+  integrity sha512-zMg7pOn96maiuMbKMXjMSbwTgq/hnZiWkBVIQL3TDXNCICT3uxSEW0vvPFyPNOg0JNvc0sb08Wvz5TyP5F8AjA==
   dependencies:
     "@babel/plugin-syntax-import-meta" "^7.10.4"
-    "@rollup/plugin-alias" "^3.0.1"
-    "@rollup/plugin-commonjs" "^15.0.0"
-    "@rollup/plugin-inject" "^4.0.2"
-    "@rollup/plugin-json" "^4.0.0"
-    "@rollup/plugin-node-resolve" "^9.0.0"
-    "@snowpack/plugin-build-script" "^2.0.6"
-    "@snowpack/plugin-run-script" "^2.1.1"
+    "@snowpack/plugin-build-script" "^2.0.7"
+    "@snowpack/plugin-run-script" "^2.1.3"
     cacache "^15.0.0"
     cachedir "^2.3.0"
     chokidar "^3.4.0"
     compressible "^2.0.18"
-    cosmiconfig "^6.0.0"
+    cosmiconfig "^7.0.0"
     css-modules-loader-core "^1.1.0"
     deepmerge "^4.2.2"
     detect-port "^1.3.0"
-    es-module-lexer "^0.3.17"
-    esbuild "^0.6.11"
+    es-module-lexer "^0.3.24"
+    esbuild "^0.6.28"
+    esinstall "^0.2.0"
     etag "^1.8.1"
     execa "^4.0.3"
     find-cache-dir "^3.3.1"
@@ -9091,19 +9131,18 @@ snowpack@2.9.3:
     glob "^7.1.4"
     got "^11.1.4"
     http-proxy "^1.18.1"
-    is-builtin-module "^3.0.0"
+    isbinaryfile "^4.0.6"
     jsonschema "^1.2.5"
-    kleur "^4.1.0"
+    kleur "^4.1.1"
     mime-types "^2.1.26"
     mkdirp "^1.0.3"
     npm-run-path "^4.0.1"
     open "^7.0.4"
-    p-queue "^6.2.1"
+    p-queue "^6.6.1"
     resolve-from "^5.0.0"
     rimraf "^3.0.0"
-    rollup "^2.23.0"
-    rollup-plugin-node-polyfills "^0.2.1"
     signal-exit "^3.0.3"
+    strip-ansi "^6.0.0"
     strip-comments "^2.0.1"
     tar "^6.0.1"
     validate-npm-package-name "^3.0.0"
@@ -10213,7 +10252,7 @@ yallist@^4.0.0:
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
 
-yaml@^1.7.2:
+yaml@^1.10.0, yaml@^1.7.2:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.0.tgz#3b593add944876077d4d683fee01081bd9fff31e"
   integrity sha512-yr2icI4glYaNG+KWONODapy2/jDdMSDnrONSjblABjD9B4Z5LgiircSt8m8sRZFNi08kG9Sm0uSHtEmP3zaEGg==
