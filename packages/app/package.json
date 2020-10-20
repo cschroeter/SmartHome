@@ -21,7 +21,7 @@
     "@snowpack/plugin-babel": "2.1.0",
     "@snowpack/plugin-react-refresh": "2.1.0",
     "@testing-library/jest-dom": "5.11.4",
-    "@testing-library/react": "10.4.9",
+    "@testing-library/react": "11.1.0",
     "@types/jest": "26.0.10",
     "@types/react": "16.9.48",
     "@types/react-dom": "16.9.8",
