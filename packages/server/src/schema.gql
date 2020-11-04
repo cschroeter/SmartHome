@@ -3,9 +3,14 @@
 # ------------------------------------------------------
 
 type Thing {
-  id: Int!
+  instanceId: Int!
+  name: String!
 }
 
 type Query {
   things: [Thing!]!
+}
+
+type Mutation {
+  toggleLight(instanceId: Int!): Thing!
 }
