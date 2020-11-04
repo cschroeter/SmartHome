@@ -1,11 +1,12 @@
 import React from 'react'
-import { Center, Stack } from '@chakra-ui/core'
+import { Center, Stack, Text } from '@chakra-ui/core'
 import { MotionBox } from './MotionBox'
 import { useCycle } from 'framer-motion'
 
 export const App: React.FC = () => {
   return (
     <Center w="full" h="full">
+      <Text>Hello</Text>
       <Stack w="full" h="full">
         <Card bg="blue.500" />
         <Card bg="red.500" />
