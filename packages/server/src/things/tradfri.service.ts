@@ -1,12 +1,17 @@
-import { Injectable, Logger, LoggerService, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
-import { Accessory, AccessoryTypes, Light, TradfriClient } from 'node-tradfri-client'
-import { Thing } from './thing.model'
+import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
+import { Accessory, AccessoryTypes, TradfriClient } from 'node-tradfri-client'
+import { BooleanValue, NumberValue, Thing } from './thing.model'
+import { Builder } from 'builder-pattern'
+
+interface Dictonary<T> {
+  [id: number]: T
+}
 
 @Injectable()
 export class TradfriService implements OnModuleInit, OnModuleDestroy {
   private client: TradfriClient
-  private readonly logger = new Logger(TradfriService.name)
-  private lightbulbs = {}
+  private devices: Dictonary<Accessory> = {}
+  private things: Dictonary<Thing> = {}
 
   async onModuleInit() {
     try {
@@ -25,33 +30,36 @@ export class TradfriService implements OnModuleInit, OnModuleDestroy {
   }
 
   handleDeviceUpdated(device: Accessory) {
-    this.logger.log('Device updated: ' + device.instanceId)
+    this.devices = { ...this.devices, [device.instanceId]: device }
+
     if (device.type === AccessoryTypes.lightbulb) {
-      this.lightbulbs = { ...this.lightbulbs, [device.instanceId]: device }
+      const brightness = Builder<NumberValue>()
+        .max(254)
+        .min(0)
+        .value(device.lightList[0].dimmer)
+        .build()
+
+      const on = Builder<BooleanValue>().value(device.lightList[0].onOff).build()
+      const thing = Builder<Thing>()
+        .id(device.instanceId)
+        .title(device.name)
+        .properties({ brightness, on })
+        .build()
+      this.things = { ...this.things, [device.instanceId]: thing }
     }
   }
 
   getThings(): Thing[] {
-    const things = Object.values(this.client.devices).reduce((prev, curr) => [...prev, curr], [])
-    return things.map((thing) =>
-      Object.assign(thing, {
-        id: thing.instanceId,
-        on: thing.lightList?.[0].onOff,
-        brightness: thing.lightList?.[0].dimmer,
-      }),
-    )
+    return Object.values(this.things).reduce((prev, curr) => [...prev, curr], [])
   }
 
-  toggle(id: number) {
-    const light = this.lightbulbs[id].lightList[0]
-    const lightOn = light.onOff
-    light.toggle()
-    return Object.assign(this.client.devices[id], { id: id, on: !lightOn })
+  getThing(id: number): Thing {
+    return this.things[id]
   }
 
-  async setBrightness(id: number, brightness: number) {
-    const light: Light = this.lightbulbs[id].lightList[0]
-    await light.setBrightness(brightness)
-    return Object.assign(this.client.devices[id], { id: id, brightness })
+  async setProperty(id: number, value: string): Promise<Thing> {
+    await this.devices[id].lightList[0].setBrightness(Number(value))
+    const thing = this.getThing(id)
+    return Object.assign(thing, { properties: { brightness: { value } } })
   }
 }

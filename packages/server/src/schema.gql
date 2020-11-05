@@ -2,34 +2,28 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-interface Property {
-  type: PropertyType!
-  title: String!
+type NumberValue {
+  type: String!
+  min: Float!
+  max: Float!
+  value: Float!
 }
 
-enum PropertyType {
-  Brightness
-  OnOff
+type BooleanValue {
+  type: String!
+  value: Boolean!
+}
+
+type Properties {
+  brightness: NumberValue
+  on: BooleanValue
 }
 
 type Thing {
   id: Int!
   title: String!
   description: String!
-  properties: [Property!]!
-}
-
-type Brightness implements Property {
-  type: PropertyType!
-  title: String!
-  min: Float!
-  max: Float!
-}
-
-type OnOff implements Property {
-  type: PropertyType!
-  title: String!
-  value: Boolean!
+  properties: Properties!
 }
 
 type Query {
@@ -37,6 +31,5 @@ type Query {
 }
 
 type Mutation {
-  toggleLight(id: Int!): Thing!
-  setBrightness(brightness: Int!, id: Int!): Thing!
+  setProperty(value: String!, property: String!, id: Int!): Thing!
 }
