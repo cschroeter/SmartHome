@@ -2,11 +2,34 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+interface Property {
+  type: PropertyType!
+  title: String!
+}
+
+enum PropertyType {
+  Brightness
+  OnOff
+}
+
 type Thing {
   id: Int!
-  name: String!
-  on: Boolean
-  brightness: Float
+  title: String!
+  description: String!
+  properties: [Property!]!
+}
+
+type Brightness implements Property {
+  type: PropertyType!
+  title: String!
+  min: Float!
+  max: Float!
+}
+
+type OnOff implements Property {
+  type: PropertyType!
+  title: String!
+  value: Boolean!
 }
 
 type Query {

@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql'
-import { Thing } from './thing.model'
+import { PropertyType, Thing } from './thing.model'
 import { TradfriService } from './tradfri.service'
 
 @Resolver(() => Thing)
@@ -8,7 +8,19 @@ export class ThingsResolver {
 
   @Query(() => [Thing])
   things(): Thing[] {
-    return this.tradfriService.getThings()
+    const thing: Thing = {
+      id: 65539,
+      title: 'Tradfri Light Bulb',
+      description: 'you ikea lamp',
+      properties: [
+        // @ts-ignore
+        { type: PropertyType.OnOff, title: 'Light', value: true },
+        // @ts-ignore
+        { type: PropertyType.Brightness, title: 'Brightness', max: 254, min: 0 },
+      ],
+    }
+    return [thing]
+    // return this.tradfriService.getThings()
   }
 
   @Mutation((returns) => Thing)
