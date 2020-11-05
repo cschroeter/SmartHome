@@ -9,6 +9,10 @@ import { ThingsModule } from './things/things.module'
   imports: [
     GraphQLModule.forRoot({
       autoSchemaFile: (join(process.cwd()), 'src/schema.gql'),
+      cors: {
+        origin: 'http://localhost:3000',
+        credentials: true,
+      },
     }),
     ThingsModule,
   ],

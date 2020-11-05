@@ -12,7 +12,15 @@ export class ThingsResolver {
   }
 
   @Mutation((returns) => Thing)
-  async toggleLight(@Args({ name: 'instanceId', type: () => Int }) instanceId: number) {
-    return this.tradfriService.toggle(instanceId)
+  async toggleLight(@Args({ name: 'id', type: () => Int }) id: number) {
+    return this.tradfriService.toggle(id)
+  }
+
+  @Mutation((returns) => Thing)
+  async setBrightness(
+    @Args('id', { type: () => Int }) id: number,
+    @Args('brightness', { type: () => Int }) brightness: number,
+  ) {
+    return this.tradfriService.setBrightness(id, brightness)
   }
 }

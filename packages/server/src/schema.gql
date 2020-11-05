@@ -3,8 +3,10 @@
 # ------------------------------------------------------
 
 type Thing {
-  instanceId: Int!
+  id: Int!
   name: String!
+  on: Boolean
+  brightness: Float
 }
 
 type Query {
@@ -12,5 +14,6 @@ type Query {
 }
 
 type Mutation {
-  toggleLight(instanceId: Int!): Thing!
+  toggleLight(id: Int!): Thing!
+  setBrightness(brightness: Int!, id: Int!): Thing!
 }

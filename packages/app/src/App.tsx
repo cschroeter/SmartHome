@@ -1,37 +1,52 @@
 import React from 'react'
-import { Center, Stack, Text } from '@chakra-ui/core'
-import { MotionBox } from './MotionBox'
-import { useCycle } from 'framer-motion'
+import { Box, Switch, Stack, Center } from '@chakra-ui/core'
+import { useQuery, gql, useMutation } from '@apollo/client'
+
+const THINGS = gql`
+  query Things {
+    things {
+      id
+      name
+      on
+      brightness
+    }
+  }
+`
+
+const TOGGLE_LIGHT = gql`
+  mutation ToggleLight($id: Int!) {
+    toggleLight(id: $id) {
+      id
+      name
+      on
+      brightness
+    }
+  }
+`
 
 export const App: React.FC = () => {
+  const { loading, error, data } = useQuery(THINGS)
+  const [toggleLight] = useMutation(TOGGLE_LIGHT)
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error :(</p>
+
+  // TODO need thing interface
   return (
-    <Center w="full" h="full">
-      <Text>Hello</Text>
-      <Stack w="full" h="full">
-        <Card bg="blue.500" />
-        <Card bg="red.500" />
-        <Card bg="yellow.500" />
+    <Center>
+      <Stack spacing={4} shouldWrapChildren>
+        {data.things.map((thing: any) => (
+          <Box key={thing.id} w="300px" bg="gray.600" p={4}>
+            {thing.brightness && (
+              <Switch
+                isChecked={thing.on}
+                onChange={() => toggleLight({ variables: { id: thing.id } })}
+              />
+            )}
+            {thing.name}
+          </Box>
+        ))}
       </Stack>
     </Center>
-  )
-}
-
-export const Card: React.FC<any> = (props) => {
-  const [animate, cycleCard] = useCycle(
-    {
-      card: { width: '200px', height: '200px' },
-    },
-    { card: { width: '100vw', height: '100vh' } },
-  )
-  return (
-    <MotionBox
-      margin="0 auto"
-      initial={{ width: '200px', height: '200px' }}
-      animate={animate.card}
-      onTap={() => {
-        cycleCard()
-      }}
-      {...props}
-    />
   )
 }
