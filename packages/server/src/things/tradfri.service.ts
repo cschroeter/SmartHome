@@ -1,10 +1,11 @@
-import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
+import { Injectable, Logger, LoggerService, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { Accessory, AccessoryTypes, Light, TradfriClient } from 'node-tradfri-client'
 import { Thing } from './thing.model'
 
 @Injectable()
 export class TradfriService implements OnModuleInit, OnModuleDestroy {
   private client: TradfriClient
+  private readonly logger = new Logger(TradfriService.name)
   private lightbulbs = {}
 
   async onModuleInit() {
@@ -24,7 +25,7 @@ export class TradfriService implements OnModuleInit, OnModuleDestroy {
   }
 
   handleDeviceUpdated(device: Accessory) {
-    console.log('Device updated', device.instanceId)
+    this.logger.log('Device updated: ' + device.instanceId)
     if (device.type === AccessoryTypes.lightbulb) {
       this.lightbulbs = { ...this.lightbulbs, [device.instanceId]: device }
     }
@@ -42,7 +43,6 @@ export class TradfriService implements OnModuleInit, OnModuleDestroy {
   }
 
   toggle(id: number) {
-    console.log('toggle light', this.lightbulbs[id].lightList[0])
     const light = this.lightbulbs[id].lightList[0]
     const lightOn = light.onOff
     light.toggle()

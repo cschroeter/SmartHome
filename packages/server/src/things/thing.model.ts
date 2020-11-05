@@ -1,16 +1,30 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 
+// https://iot.mozilla.org/wot/#thing-resource
 @ObjectType()
 export class Thing {
   @Field(() => Int)
   id: number
 
   @Field()
-  name: string
+  title: string
 
-  @Field({ nullable: true })
-  on?: boolean
+  @Field()
+  description: string
 
-  @Field({ nullable: true })
-  brightness: number
+  properties: any
+  actions: any
+  events: any
+
+  // @Field({ nullable: true })
+  // on?: boolean
+
+  // @Field({ nullable: true })
+  // brightness: number
+}
+
+@ObjectType()
+export class Property {
+  @Field()
+  title: string
 }

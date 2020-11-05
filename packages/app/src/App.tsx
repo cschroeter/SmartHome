@@ -37,12 +37,10 @@ export const App: React.FC = () => {
       <Stack spacing={4} shouldWrapChildren>
         {data.things.map((thing: any) => (
           <Box key={thing.id} w="300px" bg="gray.600" p={4}>
-            {thing.brightness && (
-              <Switch
-                isChecked={thing.on}
-                onChange={() => toggleLight({ variables: { id: thing.id } })}
-              />
-            )}
+            <Switch
+              isChecked={thing.on}
+              onChange={() => toggleLight({ variables: { id: thing.id } })}
+            />
             {thing.name}
           </Box>
         ))}
