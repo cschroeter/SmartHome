@@ -24,11 +24,10 @@ type Thing {
   title: String!
   description: String!
   properties: Properties!
-  capabilities: [Capabilities!]!
-  _type: String!
+  capabilities: [Capability!]!
 }
 
-enum Capabilities {
+enum Capability {
   Light
   OnOffSwitch
 }

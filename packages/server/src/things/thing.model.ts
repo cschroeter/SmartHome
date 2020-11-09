@@ -44,13 +44,13 @@ export class Properties {
   on?: BooleanValue
 }
 
-export enum Capabilities {
+export enum Capability {
   Light,
   OnOffSwitch,
 }
 
-registerEnumType(Capabilities, {
-  name: 'Capabilities',
+registerEnumType(Capability, {
+  name: 'Capability',
 })
 
 @ObjectType()
@@ -67,9 +67,6 @@ export class Thing {
   @Field((type) => Properties)
   properties: Properties
 
-  @Field((type) => [Capabilities])
-  capabilities: Capabilities[]
-
-  @Field({ name: '@type' })
-  '_type': string
+  @Field((type) => [Capability])
+  capabilities: Capability[]
 }

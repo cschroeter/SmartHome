@@ -1,6 +1,6 @@
 import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { Accessory, AccessoryTypes, TradfriClient } from 'node-tradfri-client'
-import { BooleanValue, Capabilities, NumberValue, Thing } from './thing.model'
+import { BooleanValue, Capability, NumberValue, Thing } from './thing.model'
 import { Builder } from 'builder-pattern'
 
 interface Dictonary<T> {
@@ -45,7 +45,7 @@ export class TradfriService implements OnModuleInit, OnModuleDestroy {
       const thing = Builder<Thing>()
         .id(device.instanceId)
         .title(device.name)
-        .capabilities([Capabilities.Light])
+        .capabilities([Capability.Light])
         .properties({ brightness, on })
         .build()
       this.things = { ...this.things, [device.instanceId]: thing }
