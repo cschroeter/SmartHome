@@ -35,12 +35,21 @@ export class BooleanValue {
   value: boolean
 }
 
+export enum Property {
+  Brightness,
+  OnOff,
+}
+
+registerEnumType(Property, {
+  name: 'Property',
+})
+
 @ObjectType()
 export class Properties {
-  @Field((type) => NumberValue, { nullable: true })
+  @Field(() => NumberValue, { nullable: true })
   brightness?: NumberValue
 
-  @Field((type) => BooleanValue, { nullable: true })
+  @Field(() => BooleanValue, { nullable: true })
   on?: BooleanValue
 }
 
@@ -64,9 +73,9 @@ export class Thing {
   @Field()
   description: string
 
-  @Field((type) => Properties)
+  @Field(() => Properties)
   properties: Properties
 
-  @Field((type) => [Capability])
+  @Field(() => [Capability])
   capabilities: Capability[]
 }

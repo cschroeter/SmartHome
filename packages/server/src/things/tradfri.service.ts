@@ -1,7 +1,8 @@
 import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { Accessory, AccessoryTypes, TradfriClient } from 'node-tradfri-client'
-import { BooleanValue, Capability, NumberValue, Thing } from './thing.model'
+import { BooleanValue, Capability, NumberValue, Property, Thing } from './thing.model'
 import { Builder } from 'builder-pattern'
+import { SetPropertyInput } from './things.resolver'
 
 interface Dictonary<T> {
   [id: number]: T
@@ -60,16 +61,17 @@ export class TradfriService implements OnModuleInit, OnModuleDestroy {
     return this.things[id]
   }
 
-  async setProperty(id: number, value: any, property: string): Promise<Thing> {
+  async setProperty(setPropertyInput: SetPropertyInput): Promise<Thing> {
+    const { id, value, property } = setPropertyInput
     const light = this.devices[id].lightList[0]
     let thing = this.getThing(id)
 
     switch (property) {
-      case 'on':
+      case Property.OnOff:
         await light.toggle(value)
         thing.properties.on.value = value
         return thing
-      case 'brightness':
+      case Property.Brightness:
         await light.setBrightness(value)
         thing.properties.brightness.value = value
         return thing

@@ -37,7 +37,18 @@ type Query {
 }
 
 type Mutation {
-  setProperty(value: JSON!, property: String!, id: Int!): Thing!
+  setProperty(setPropertyInput: SetPropertyInput!): Thing!
+}
+
+input SetPropertyInput {
+  id: Int!
+  property: Property!
+  value: JSON!
+}
+
+enum Property {
+  Brightness
+  OnOff
 }
 
 """

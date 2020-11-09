@@ -1,6 +1,18 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql'
-import { Thing } from './thing.model'
+import { Resolver, Query, Mutation, Args, Int, Field, InputType } from '@nestjs/graphql'
+import { Property, Thing } from './thing.model'
 import { TradfriService } from './tradfri.service'
+
+@InputType()
+export class SetPropertyInput {
+  @Field(() => Int)
+  id: number
+
+  @Field(() => Property)
+  property: Property
+
+  @Field(() => JSON)
+  value: any
+}
 
 @Resolver(() => Thing)
 export class ThingsResolver {
@@ -11,12 +23,8 @@ export class ThingsResolver {
     return this.tradfriService.getThings()
   }
 
-  @Mutation((returns) => Thing)
-  async setProperty(
-    @Args('id', { type: () => Int }) id: number,
-    @Args('property') property: string,
-    @Args('value', { type: () => JSON }) value: any,
-  ): Promise<Thing> {
-    return await this.tradfriService.setProperty(id, value, property)
+  @Mutation(() => Thing)
+  async setProperty(@Args('setPropertyInput') setPropertyInput: SetPropertyInput): Promise<Thing> {
+    return await this.tradfriService.setProperty(setPropertyInput)
   }
 }
