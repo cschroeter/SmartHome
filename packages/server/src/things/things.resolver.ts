@@ -17,6 +17,6 @@ export class ThingsResolver {
     @Args('property') property: string,
     @Args('value') value: string,
   ): Promise<Thing> {
-    return await this.tradfriService.setProperty(id, value)
+    return await this.tradfriService.setProperty(id, value, property)
   }
 }

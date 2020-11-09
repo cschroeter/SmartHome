@@ -6149,6 +6149,11 @@ bufferutil@^4.0.1:
   dependencies:
     node-gyp-build "^4.2.0"
 
+builder-pattern@1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/builder-pattern/-/builder-pattern-1.2.4.tgz#69d1ad6d1a06f592c03e7ea0aa9c3178edabe995"
+  integrity sha512-WZekF4WyzDql5otqYRPvN4qRWvBcdTN+IwHcbHqTgG6E95MZiMirnWrD2Eix3EcqdnS2MKcc/YXYPvMjC6N/0g==
+
 builtin-modules@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-3.1.0.tgz#aad97c15131eb76b65b50ef208e7584cd76a7484"

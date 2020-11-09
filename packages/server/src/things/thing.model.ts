@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql'
 
 // https://iot.mozilla.org/wot/#thing-resource
 
@@ -44,6 +44,15 @@ export class Properties {
   on?: BooleanValue
 }
 
+export enum Capabilities {
+  Light,
+  OnOffSwitch,
+}
+
+registerEnumType(Capabilities, {
+  name: 'Capabilities',
+})
+
 @ObjectType()
 export class Thing {
   @Field(() => Int)
@@ -57,4 +66,10 @@ export class Thing {
 
   @Field((type) => Properties)
   properties: Properties
+
+  @Field((type) => [Capabilities])
+  capabilities: Capabilities[]
+
+  @Field({ name: '@type' })
+  '_type': string
 }

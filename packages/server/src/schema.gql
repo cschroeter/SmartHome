@@ -24,6 +24,13 @@ type Thing {
   title: String!
   description: String!
   properties: Properties!
+  capabilities: [Capabilities!]!
+  _type: String!
+}
+
+enum Capabilities {
+  Light
+  OnOffSwitch
 }
 
 type Query {

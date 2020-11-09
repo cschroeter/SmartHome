@@ -1,6 +1,6 @@
-import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
+import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { Accessory, AccessoryTypes, TradfriClient } from 'node-tradfri-client'
-import { BooleanValue, NumberValue, Thing } from './thing.model'
+import { BooleanValue, Capabilities, NumberValue, Thing } from './thing.model'
 import { Builder } from 'builder-pattern'
 
 interface Dictonary<T> {
@@ -9,6 +9,7 @@ interface Dictonary<T> {
 
 @Injectable()
 export class TradfriService implements OnModuleInit, OnModuleDestroy {
+  private readonly logger = new Logger(TradfriService.name)
   private client: TradfriClient
   private devices: Dictonary<Accessory> = {}
   private things: Dictonary<Thing> = {}
@@ -30,11 +31,12 @@ export class TradfriService implements OnModuleInit, OnModuleDestroy {
   }
 
   handleDeviceUpdated(device: Accessory) {
+    this.logger.log(`${device.name} [${device.instanceId}] was updated`)
     this.devices = { ...this.devices, [device.instanceId]: device }
 
     if (device.type === AccessoryTypes.lightbulb) {
       const brightness = Builder<NumberValue>()
-        .max(254)
+        .max(100)
         .min(0)
         .value(device.lightList[0].dimmer)
         .build()
@@ -43,6 +45,7 @@ export class TradfriService implements OnModuleInit, OnModuleDestroy {
       const thing = Builder<Thing>()
         .id(device.instanceId)
         .title(device.name)
+        .capabilities([Capabilities.Light])
         .properties({ brightness, on })
         .build()
       this.things = { ...this.things, [device.instanceId]: thing }
@@ -57,9 +60,23 @@ export class TradfriService implements OnModuleInit, OnModuleDestroy {
     return this.things[id]
   }
 
-  async setProperty(id: number, value: string): Promise<Thing> {
-    await this.devices[id].lightList[0].setBrightness(Number(value))
-    const thing = this.getThing(id)
-    return Object.assign(thing, { properties: { brightness: { value } } })
+  async setProperty(id: number, value: string, property: string): Promise<Thing> {
+    const light = this.devices[id].lightList[0]
+    let thing = this.getThing(id)
+
+    switch (property) {
+      case 'on':
+        const onOff = JSON.parse(value)
+        await light.toggle(onOff)
+        thing.properties.on.value = onOff
+        return thing
+      case 'brightness':
+        await light.setBrightness(Number(value))
+        thing.properties.brightness.value = Number(value)
+        return thing
+      default:
+        console.log('not supported')
+    }
+    return thing
   }
 }
