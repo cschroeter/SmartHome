@@ -12,15 +12,11 @@ export class ThingsResolver {
   }
 
   @Mutation((returns) => Thing)
-  async toggleLight(@Args({ name: 'id', type: () => Int }) id: number) {
-    return this.tradfriService.toggle(id)
-  }
-
-  @Mutation((returns) => Thing)
-  async setBrightness(
+  async setProperty(
     @Args('id', { type: () => Int }) id: number,
-    @Args('brightness', { type: () => Int }) brightness: number,
-  ) {
-    return this.tradfriService.setBrightness(id, brightness)
+    @Args('property') property: string,
+    @Args('value') value: string,
+  ): Promise<Thing> {
+    return await this.tradfriService.setProperty(id, value, property)
   }
 }

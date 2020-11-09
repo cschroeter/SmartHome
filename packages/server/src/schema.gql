@@ -2,11 +2,34 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type NumberValue {
+  type: String!
+  min: Float!
+  max: Float!
+  value: Float!
+}
+
+type BooleanValue {
+  type: String!
+  value: Boolean!
+}
+
+type Properties {
+  brightness: NumberValue
+  on: BooleanValue
+}
+
 type Thing {
   id: Int!
-  name: String!
-  on: Boolean
-  brightness: Float
+  title: String!
+  description: String!
+  properties: Properties!
+  capabilities: [Capability!]!
+}
+
+enum Capability {
+  Light
+  OnOffSwitch
 }
 
 type Query {
@@ -14,6 +37,5 @@ type Query {
 }
 
 type Mutation {
-  toggleLight(id: Int!): Thing!
-  setBrightness(brightness: Int!, id: Int!): Thing!
+  setProperty(value: String!, property: String!, id: Int!): Thing!
 }

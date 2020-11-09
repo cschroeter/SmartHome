@@ -1,52 +1,67 @@
-import React from 'react'
-import { Box, Switch, Stack, Center } from '@chakra-ui/core'
+import React, { useCallback } from 'react'
 import { useQuery, gql, useMutation } from '@apollo/client'
+import { Thing } from './things/Thing'
 
 const THINGS = gql`
   query Things {
     things {
       id
-      name
-      on
-      brightness
+      title
+      properties {
+        brightness {
+          min
+          max
+          value
+        }
+        on {
+          value
+        }
+      }
     }
   }
 `
 
-const TOGGLE_LIGHT = gql`
-  mutation ToggleLight($id: Int!) {
-    toggleLight(id: $id) {
+const SET_PROPERTY = gql`
+  mutation SetProperty($id: Int!, $value: String!, $property: String!) {
+    setProperty(value: $value, id: $id, property: $property) {
       id
-      name
-      on
-      brightness
+      properties {
+        brightness {
+          value
+        }
+        on {
+          value
+        }
+      }
     }
   }
 `
 
 export const App: React.FC = () => {
   const { loading, error, data } = useQuery(THINGS)
-  const [toggleLight] = useMutation(TOGGLE_LIGHT)
+  const [setProperty] = useMutation(SET_PROPERTY)
+
+  console.log('Render app')
+
+  const handlePropertyChange = useCallback(
+    (property, value, id) => {
+      console.log('set property', property, value, id)
+      setProperty({
+        variables: {
+          property,
+          value: String(value),
+          id,
+        },
+      })
+    },
+    [setProperty],
+  )
 
   if (loading) return <p>Loading...</p>
-  if (error) return <p>Error :(</p>
+  if (error) return <p>Error :( {error.toString()}</p>
 
   // TODO need thing interface
-  return (
-    <Center>
-      <Stack spacing={4} shouldWrapChildren>
-        {data.things.map((thing: any) => (
-          <Box key={thing.id} w="300px" bg="gray.600" p={4}>
-            {thing.brightness && (
-              <Switch
-                isChecked={thing.on}
-                onChange={() => toggleLight({ variables: { id: thing.id } })}
-              />
-            )}
-            {thing.name}
-          </Box>
-        ))}
-      </Stack>
-    </Center>
-  )
+  return data.things.map((thing: any) => (
+    <Thing key={thing.id} thing={thing} onPropertyChange={handlePropertyChange} />
+  ))
 }

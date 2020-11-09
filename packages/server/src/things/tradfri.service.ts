@@ -1,11 +1,18 @@
-import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
-import { Accessory, AccessoryTypes, Light, TradfriClient } from 'node-tradfri-client'
-import { Thing } from './thing.model'
+import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
+import { Accessory, AccessoryTypes, TradfriClient } from 'node-tradfri-client'
+import { BooleanValue, Capability, NumberValue, Thing } from './thing.model'
+import { Builder } from 'builder-pattern'
+
+interface Dictonary<T> {
+  [id: number]: T
+}
 
 @Injectable()
 export class TradfriService implements OnModuleInit, OnModuleDestroy {
+  private readonly logger = new Logger(TradfriService.name)
   private client: TradfriClient
-  private lightbulbs = {}
+  private devices: Dictonary<Accessory> = {}
+  private things: Dictonary<Thing> = {}
 
   async onModuleInit() {
     try {
@@ -24,34 +31,52 @@ export class TradfriService implements OnModuleInit, OnModuleDestroy {
   }
 
   handleDeviceUpdated(device: Accessory) {
-    console.log('Device updated', device.instanceId)
+    this.logger.log(`${device.name} [${device.instanceId}] was updated`)
+    this.devices = { ...this.devices, [device.instanceId]: device }
+
     if (device.type === AccessoryTypes.lightbulb) {
-      this.lightbulbs = { ...this.lightbulbs, [device.instanceId]: device }
+      const brightness = Builder<NumberValue>()
+        .max(100)
+        .min(0)
+        .value(device.lightList[0].dimmer)
+        .build()
+
+      const on = Builder<BooleanValue>().value(device.lightList[0].onOff).build()
+      const thing = Builder<Thing>()
+        .id(device.instanceId)
+        .title(device.name)
+        .capabilities([Capability.Light])
+        .properties({ brightness, on })
+        .build()
+      this.things = { ...this.things, [device.instanceId]: thing }
     }
   }
 
   getThings(): Thing[] {
-    const things = Object.values(this.client.devices).reduce((prev, curr) => [...prev, curr], [])
-    return things.map((thing) =>
-      Object.assign(thing, {
-        id: thing.instanceId,
-        on: thing.lightList?.[0].onOff,
-        brightness: thing.lightList?.[0].dimmer,
-      }),
-    )
+    return Object.values(this.things).reduce((prev, curr) => [...prev, curr], [])
   }
 
-  toggle(id: number) {
-    console.log('toggle light', this.lightbulbs[id].lightList[0])
-    const light = this.lightbulbs[id].lightList[0]
-    const lightOn = light.onOff
-    light.toggle()
-    return Object.assign(this.client.devices[id], { id: id, on: !lightOn })
+  getThing(id: number): Thing {
+    return this.things[id]
   }
 
-  async setBrightness(id: number, brightness: number) {
-    const light: Light = this.lightbulbs[id].lightList[0]
-    await light.setBrightness(brightness)
-    return Object.assign(this.client.devices[id], { id: id, brightness })
+  async setProperty(id: number, value: string, property: string): Promise<Thing> {
+    const light = this.devices[id].lightList[0]
+    let thing = this.getThing(id)
+
+    switch (property) {
+      case 'on':
+        const onOff = JSON.parse(value)
+        await light.toggle(onOff)
+        thing.properties.on.value = onOff
+        return thing
+      case 'brightness':
+        await light.setBrightness(Number(value))
+        thing.properties.brightness.value = Number(value)
+        return thing
+      default:
+        console.log('not supported')
+    }
+    return thing
   }
 }
