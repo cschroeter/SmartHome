@@ -22,7 +22,7 @@ const THINGS = gql`
 `
 
 const SET_PROPERTY = gql`
-  mutation SetProperty($id: Int!, $value: String!, $property: String!) {
+  mutation SetProperty($id: Int!, $value: JSON!, $property: String!) {
     setProperty(value: $value, id: $id, property: $property) {
       id
       properties {
@@ -45,11 +45,10 @@ export const App: React.FC = () => {
 
   const handlePropertyChange = useCallback(
     (property, value, id) => {
-      console.log('set property', property, value, id)
       setProperty({
         variables: {
           property,
-          value: String(value),
+          value,
           id,
         },
       })

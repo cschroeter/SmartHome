@@ -15,6 +15,7 @@
     "apollo-server-express": "2.19.0",
     "graphql": "15.4.0",
     "graphql-tools": "7.0.1",
+    "graphql-type-json": "0.3.2",
     "node-tradfri-client": "2.1.6",
     "rxjs": "6.6.3"
   },

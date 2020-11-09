@@ -60,19 +60,18 @@ export class TradfriService implements OnModuleInit, OnModuleDestroy {
     return this.things[id]
   }
 
-  async setProperty(id: number, value: string, property: string): Promise<Thing> {
+  async setProperty(id: number, value: any, property: string): Promise<Thing> {
     const light = this.devices[id].lightList[0]
     let thing = this.getThing(id)
 
     switch (property) {
       case 'on':
-        const onOff = JSON.parse(value)
-        await light.toggle(onOff)
-        thing.properties.on.value = onOff
+        await light.toggle(value)
+        thing.properties.on.value = value
         return thing
       case 'brightness':
-        await light.setBrightness(Number(value))
-        thing.properties.brightness.value = Number(value)
+        await light.setBrightness(value)
+        thing.properties.brightness.value = value
         return thing
       default:
         console.log('not supported')

@@ -15,7 +15,7 @@ export class ThingsResolver {
   async setProperty(
     @Args('id', { type: () => Int }) id: number,
     @Args('property') property: string,
-    @Args('value') value: string,
+    @Args('value', { type: () => JSON }) value: any,
   ): Promise<Thing> {
     return await this.tradfriService.setProperty(id, value, property)
   }
