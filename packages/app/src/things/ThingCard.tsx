@@ -1,18 +1,19 @@
 import React, { useCallback } from 'react'
+import { SetPropertyInput, Thing } from '@graphome/core'
 import { Light } from './Light'
 
 interface Props {
-  thing: any
-  onPropertyChange: (property: any, value: any, id: any) => void
+  thing: Thing
+  onPropertyChange: (payload: SetPropertyInput) => void
 }
 
-export const Thing: React.FC<Props> = (props) => {
+export const ThingCard: React.FC<Props> = (props) => {
   const { thing, onPropertyChange } = props
 
   console.log('Render thing')
 
   const handlePropertyChange = useCallback(
-    (property, value) => onPropertyChange(property, value, thing.id),
+    (property, value) => onPropertyChange({ property, value, id: thing.id }),
     [onPropertyChange, thing.id],
   )
   // TODO check what component to render

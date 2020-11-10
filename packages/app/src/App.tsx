@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react'
 import { useQuery, gql, useMutation } from '@apollo/client'
-import { Thing } from './things/Thing'
+import { Thing, SetPropertyInput } from '@graphome/core'
+import { ThingCard } from './things/ThingCard'
 
 const THINGS = gql`
   query Things {
@@ -22,8 +23,8 @@ const THINGS = gql`
 `
 
 const SET_PROPERTY = gql`
-  mutation SetProperty($id: Int!, $value: JSON!, $property: String!) {
-    setProperty(value: $value, id: $id, property: $property) {
+  mutation SetProperty($input: SetPropertyInput!) {
+    setProperty(setPropertyInput: $input) {
       id
       properties {
         brightness {
@@ -38,19 +39,15 @@ const SET_PROPERTY = gql`
 `
 
 export const App: React.FC = () => {
-  const { loading, error, data } = useQuery(THINGS)
-  const [setProperty] = useMutation(SET_PROPERTY)
+  const { loading, error, data } = useQuery<{ things: Thing[] }>(THINGS)
+  const [setProperty] = useMutation<Thing, { input: SetPropertyInput }>(SET_PROPERTY)
 
   console.log('Render app')
 
   const handlePropertyChange = useCallback(
-    (property, value, id) => {
+    (input: SetPropertyInput) => {
       setProperty({
-        variables: {
-          property,
-          value,
-          id,
-        },
+        variables: { input },
       })
     },
     [setProperty],
@@ -60,7 +57,11 @@ export const App: React.FC = () => {
   if (error) return <p>Error :( {error.toString()}</p>
 
   // TODO need thing interface
-  return data.things.map((thing: any) => (
-    <Thing key={thing.id} thing={thing} onPropertyChange={handlePropertyChange} />
-  ))
+  return (
+    <>
+      {data?.things.map((thing: Thing) => (
+        <ThingCard key={thing.id} thing={thing} onPropertyChange={handlePropertyChange} />
+      ))}
+    </>
+  )
 }

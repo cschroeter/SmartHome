@@ -1,9 +1,12 @@
 {
-  "name": "core",
+  "name": "@graphome/core",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "license": "MIT",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "nest start --watch"
   },

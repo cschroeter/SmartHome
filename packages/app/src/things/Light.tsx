@@ -2,6 +2,10 @@ import React, { useCallback } from 'react'
 import { Box, Switch, Text } from '@chakra-ui/core'
 import { Slider } from '../ui/Slider'
 
+export enum Property {
+  Brightness = 'Brightness',
+  OnOff = 'OnOff',
+}
 interface Props {
   // onOffProperty
   // Brightness
@@ -10,18 +14,19 @@ interface Props {
   // ColorTemperature
   onOff: any
   brightness: any
-  onPropertyChange: (property: any, value: any) => void
+  onPropertyChange: (property: Property, value: any) => void
 }
 
 export const Light: React.FC<Props> = (props) => {
   const { brightness, onOff, onPropertyChange } = props
   console.log('Render light')
 
-  const handleBrightnessChange = useCallback((value) => onPropertyChange('brightness', value), [
-    onPropertyChange,
-  ])
+  const handleBrightnessChange = useCallback(
+    (value) => onPropertyChange(Property.Brightness, value),
+    [onPropertyChange],
+  )
 
-  const handleOnOffChange = useCallback(() => onPropertyChange('on', !onOff.value), [
+  const handleOnOffChange = useCallback(() => onPropertyChange(Property.OnOff, !onOff.value), [
     onPropertyChange,
     onOff.value,
   ])
