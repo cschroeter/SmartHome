@@ -1794,12 +1794,29 @@
     "@types/tinycolor2" "1.4.2"
     tinycolor2 "1.4.1"
 
+"@chakra-ui/theme-tools@1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/theme-tools/-/theme-tools-1.1.3.tgz#16b1404d530eca7c51f2ccb57d0bb33c81d0501d"
+  integrity sha512-Vw8YZwRtbzoDMOY+RxWwSpAXSwfg1S+CSJCry7gpehvumgApoBZFkbfrnXmiuOm4YsJcKgdMNdIhtFRNhtwD1w==
+  dependencies:
+    "@chakra-ui/utils" "1.5.1"
+    "@types/tinycolor2" "1.4.2"
+    tinycolor2 "1.4.2"
+
 "@chakra-ui/theme@1.0.0-rc.8":
   version "1.0.0-rc.8"
   resolved "https://registry.yarnpkg.com/@chakra-ui/theme/-/theme-1.0.0-rc.8.tgz#7033c61f2bbc5984960b38f34d621dea62a7f11d"
   integrity sha512-P7X6j2WqTR2YpqXjX5dAWQ6N9QwB11QOwuPL1V+wQoQVIIcElUm9koibhWPN8oUqDteTPa9lQ+cK79RIJ2bw4w==
   dependencies:
     "@chakra-ui/theme-tools" "1.0.0-rc.8"
+
+"@chakra-ui/theme@1.8.1":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/theme/-/theme-1.8.1.tgz#584b1a0c05c250e60aa78d2776c615a1b248ec17"
+  integrity sha512-EPjXK9eAL3wOe86M0HrsfkVoRBn5VXzeSAeKvxkRXELxaPwnz5X/HOpGvA2J0zlwYqv1K11jxavVNZ8F1rQT7A==
+  dependencies:
+    "@chakra-ui/theme-tools" "1.1.3"
+    "@chakra-ui/utils" "1.5.1"
 
 "@chakra-ui/toast@1.0.0-rc.8":
   version "1.0.0-rc.8"
@@ -1842,6 +1859,15 @@
     css-box-model "1.2.1"
     lodash.mergewith "4.6.2"
     object-assign "4.1.1"
+
+"@chakra-ui/utils@1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/utils/-/utils-1.5.1.tgz#a01fd14f6d948a13c2644cfa844f410299135ffc"
+  integrity sha512-J8P9wA96Kaxu4oHh+8s1rEL2VABWK/io8sBck19eOXKfVXJ55KyVwGZTrsVID0No43b7WzJx6n/xsMKkn39Peg==
+  dependencies:
+    "@types/lodash.mergewith" "4.6.6"
+    css-box-model "1.2.1"
+    lodash.mergewith "4.6.2"
 
 "@chakra-ui/visually-hidden@1.0.0-rc.8":
   version "1.0.0-rc.8"
@@ -16596,6 +16622,11 @@ tinycolor2@1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
   integrity sha1-9PrTM0R7wLB9TcjpIJ2POaisd+g=
+
+tinycolor2@1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.2.tgz#3f6a4d1071ad07676d7fa472e1fac40a719d8803"
+  integrity sha512-vJhccZPs965sV/L2sU4oRQVAos0pQXwsvTLkWYdqJ+a8Q5kPFzJTuOFwy7UniPli44NKQGAglksjvOcpo95aZA==
 
 tmp@^0.0.33:
   version "0.0.33"
